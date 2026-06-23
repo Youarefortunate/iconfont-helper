@@ -1,0 +1,39 @@
+{
+  "demo-mp": {
+    "name": "示例小程序",
+    "project_id": "可以在对应的Iconfont项目的链接中查看",
+    "font_name": "demo-icons",
+    "associated_project": "apps/demo-mp",
+    "svg_dir": "apps/demo-mp/styles/iconfont/svg",
+    "outputs": [
+      {
+        "type": "scss_map",
+        "path": "apps/demo-mp/styles/iconfont/icons.scss"
+      },
+      {
+        "type": "font_face",
+        "path": "apps/demo-mp/styles/iconfont/index.scss"
+      }
+    ]
+  },
+  "component-lib": {
+    "name": "示例组件库包",
+    "project_id": "7654321",
+    "font_name": "component-icons",
+    "svg_dir": "packages/components/assets/icons",
+    "outputs": [
+      {
+        "type": "scss_map",
+        "path": "packages/components/styles/icons.scss"
+      },
+      {
+        "type": "font_face",
+        "path": "packages/components/icon/icon.scss"
+      },
+      {
+        "type": "data_js",
+        "path": "packages/components/icon/example/data.js"
+      }
+    ]
+  }
+}
