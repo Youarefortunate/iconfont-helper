@@ -14,7 +14,9 @@ class IconfontConfigError(RuntimeError):
 def load_projects() -> Dict[str, Dict[str, Any]]:
     """读取 iconfont.json 中注册的项目配置。"""
     if not CONFIG_PATH.exists():
-        raise IconfontConfigError(f"未找到项目配置文件: {CONFIG_PATH}")
+        raise IconfontConfigError(
+            f"未找到项目配置文件: {CONFIG_PATH}，请先复制 scripts/iconfont.example.json 为 scripts/iconfont.json 并填写自己的项目配置"
+        )
 
     with CONFIG_PATH.open("r", encoding="utf-8") as f:
         return json.load(f)

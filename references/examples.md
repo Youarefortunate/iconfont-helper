@@ -21,31 +21,31 @@ python scripts/main.py projects
 ### 查看项目概要
 
 ```bash
-python scripts/main.py detail --project=demo-mp
+python scripts/main.py detail --project=web-app-icons
 ```
 
 ### 查看项目全部图标
 
 ```bash
-python scripts/main.py list --project=demo-mp
+python scripts/main.py list --project=web-app-icons
 ```
 
 ### 按名称查询单个图标
 
 ```bash
-python scripts/main.py find --project=demo-mp --name arrow-right
+python scripts/main.py find --project=web-app-icons --name arrow-right
 ```
 
 ### 按多个条件查询图标
 
 ```bash
-python scripts/main.py find --project=demo-mp --name arrow-right --font-class arrow-right --unicode 58883
+python scripts/main.py find --project=web-app-icons --name arrow-right --font-class arrow-right --unicode 58883
 ```
 
 ### 删除前查询目标 ID
 
 ```bash
-python scripts/main.py find --project=demo-mp --name arrow-right
+python scripts/main.py find --project=web-app-icons --name arrow-right
 ```
 
 如果返回多个同名图标，后续删除应选择其中一个 `id` 精确删除。
@@ -57,37 +57,37 @@ python scripts/main.py find --project=demo-mp --name arrow-right
 ### 上传单个 SVG
 
 ```bash
-python scripts/main.py create --project=demo-mp --svg ./assets/icons/arrow-right.svg --confirm
+python scripts/main.py create --project=web-app-icons --svg ./assets/icons/arrow-right.svg --confirm
 ```
 
 ### 批量上传 SVG
 
 ```bash
-python scripts/main.py create --project=demo-mp --svg a.svg --svg b.svg --confirm
+python scripts/main.py create --project=web-app-icons --svg a.svg --svg b.svg --confirm
 ```
 
 ### 上传目录内所有 SVG
 
 ```bash
-python scripts/main.py create --project=demo-mp --svg-dir ./assets/icons --confirm
+python scripts/main.py create --project=web-app-icons --svg-dir ./assets/icons --confirm
 ```
 
 ### 修改图标名称和 font_class
 
 ```bash
-python scripts/main.py update --project=demo-mp --font-class arrow-right --new-name arrow-right-test --new-font-class arrow-right-test --confirm
+python scripts/main.py update --project=web-app-icons --font-class arrow-right --new-name arrow-right-test --new-font-class arrow-right-test --confirm
 ```
 
 ### 按 ID 精确删除图标
 
 ```bash
-python scripts/main.py delete --project=demo-mp --id 47886136 --confirm
+python scripts/main.py delete --project=web-app-icons --id 47886136 --confirm
 ```
 
 ### 按名称 dry-run 删除
 
 ```bash
-python scripts/main.py delete --project=demo-mp --name arrow-right
+python scripts/main.py delete --project=web-app-icons --name arrow-right
 ```
 
 如果存在多个同名图标，该命令会阻止删除并提示改用 `--id`。
@@ -95,19 +95,19 @@ python scripts/main.py delete --project=demo-mp --name arrow-right
 ### 全删 dry-run
 
 ```bash
-python scripts/main.py delete --project=demo-mp --all
+python scripts/main.py delete --project=web-app-icons --all
 ```
 
 ### 全删真实执行
 
 ```bash
-python scripts/main.py delete --project=demo-mp --all --confirm --yes-i-know
+python scripts/main.py delete --project=web-app-icons --all --confirm --yes-i-know
 ```
 
 ### 刷新 CDN
 
 ```bash
-python scripts/main.py refresh --project=demo-mp --confirm
+python scripts/main.py refresh --project=web-app-icons --confirm
 ```
 
 ## 同步工作流组
@@ -117,7 +117,7 @@ python scripts/main.py refresh --project=demo-mp --confirm
 ### 上传后同步本地 SVG 与字体产物
 
 ```bash
-python scripts/main.py create-sync --project=demo-mp --svg ./assets/icons/arrow-right.svg --confirm
+python scripts/main.py create-sync --project=web-app-icons --svg ./assets/icons/arrow-right.svg --confirm
 ```
 
 新上传素材可能需要约 5 分钟审核；如果同步结果没有出现新图标，请等待后重新执行同步流程。
@@ -125,25 +125,25 @@ python scripts/main.py create-sync --project=demo-mp --svg ./assets/icons/arrow-
 ### 修改后同步本地 SVG 与字体产物
 
 ```bash
-python scripts/main.py update-sync --project=demo-mp --font-class arrow-right --new-name arrow-right-test --new-font-class arrow-right-test --confirm
+python scripts/main.py update-sync --project=web-app-icons --font-class arrow-right --new-name arrow-right-test --new-font-class arrow-right-test --confirm
 ```
 
 ### 删除后同步本地 SVG 与字体产物
 
 ```bash
-python scripts/main.py delete-sync --project=demo-mp --id 47886136 --confirm
+python scripts/main.py delete-sync --project=web-app-icons --id 47886136 --confirm
 ```
 
-### component-lib 上传后同步
+### library-icons 上传后同步
 
 ```bash
-python scripts/main.py create-sync --project=component-lib --svg ./packages/components/assets/icons/example.svg --confirm
+python scripts/main.py create-sync --project=library-icons --svg ./packages/icon-library/assets/svg/example.svg --confirm
 ```
 
-### component-lib 删除后同步
+### library-icons 删除后同步
 
 ```bash
-python scripts/main.py delete-sync --project=component-lib --id 47886136 --confirm
+python scripts/main.py delete-sync --project=library-icons --id 47886136 --confirm
 ```
 
 ## 本地输出类型组
@@ -155,7 +155,7 @@ python scripts/main.py delete-sync --project=component-lib --id 47886136 --confi
 ```json
 {
   "type": "scss_map",
-  "path": "apps/demo-mp/styles/iconfont/icons.scss"
+  "path": "src/styles/icons.scss"
 }
 ```
 
@@ -164,7 +164,7 @@ python scripts/main.py delete-sync --project=component-lib --id 47886136 --confi
 ```json
 {
   "type": "font_face",
-  "path": "apps/demo-mp/styles/iconfont/index.scss"
+  "path": "src/styles/iconfont.css"
 }
 ```
 
@@ -173,6 +173,6 @@ python scripts/main.py delete-sync --project=component-lib --id 47886136 --confi
 ```json
 {
   "type": "data_js",
-  "path": "packages/components/icon/_example/data.js"
+  "path": "packages/icon-library/examples/icons.js"
 }
 ```

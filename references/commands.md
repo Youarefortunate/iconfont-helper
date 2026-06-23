@@ -70,5 +70,5 @@
 | 输出类型 | 功能 | 配置字段 | 输出行为 |
 | :--- | :--- | :--- | :--- |
 | `scss_map` | 生成 SCSS 图标映射表 | `type`、`path` | 写入 `$icons` map，例如图标名到 Unicode 的映射 |
-| `font_face` | 更新样式文件中的 `@font-face` | `type`、`path` | 将 TTF 转 Base64 后内联到目标 SCSS/WXSS |
+| `font_face` | 更新样式文件中的 `@font-face` | `type`、`path` | 将 TTF 转 Base64 后内联到目标 CSS、SCSS 或其他样式文件 |
 | `data_js` | 生成图标名称数组 JS 文件 | `type`、`path` | 写入图标名称列表，供示例页或遍历展示使用 |

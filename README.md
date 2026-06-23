@@ -84,20 +84,20 @@ Copy-Item scripts/iconfont.example.json scripts/iconfont.json
 
 ```json
 {
-  "demo-mp": {
-    "name": "示例小程序",
+  "web-app-icons": {
+    "name": "示例 Web 应用图标库",
     "project_id": "1234567",
-    "font_name": "demo-icons",
-    "associated_project": "apps/demo-mp",
-    "svg_dir": "apps/demo-mp/styles/iconfont/svg",
+    "font_name": "web-app-icons",
+    "project_root": ".",
+    "svg_dir": "assets/icons/svg",
     "outputs": [
       {
         "type": "scss_map",
-        "path": "apps/demo-mp/styles/iconfont/icons.scss"
+        "path": "src/styles/icons.scss"
       },
       {
         "type": "font_face",
-        "path": "apps/demo-mp/styles/iconfont/index.scss"
+        "path": "src/styles/iconfont.css"
       }
     ]
   }
@@ -112,36 +112,8 @@ Copy-Item scripts/iconfont.example.json scripts/iconfont.json
 
 | 你可以这样问 AI                                      | AI 应执行的能力                                            |
 | :--------------------------------------------- | :--------------------------------------------------- |
-| `demo-mp 项目有哪些 icon？`                          | 查询 `scripts/iconfont.json` 中 `demo-mp` 对应项目，并列出远程图标。 |
+| `web-app-icons 项目有哪些 icon？`                          | 查询 `scripts/iconfont.json` 中 `web-app-icons` 对应项目，并列出远程图标。 |
 | `帮我查询 Iconfont 项目 1234567 里面叫 arrow-right 的图标` | 使用项目 ID 直接查询指定图标。                                    |
-| `帮我上传本地 ./assets/icons/add.svg 到 demo-mp 项目`   | 先 dry-run 检查 SVG，再提示是否确认上传。                          |
-| `帮我把 ./assets/icons 目录下的图标上传到 demo-mp，并同步到本地`  | 上传目录内 SVG，等待确认后执行同步工作流。                              |
-| `帮我删除 demo-mp 项目里 id 为 123 的图标并同步本地`           | 按 ID 精确删除远程图标，并同步本地 SVG 和字体产物。                       |
-
-## 常用命令
-
-命令入口位于 `scripts/main.py`。如果需要手动执行，可在本目录运行：
-
-```bash
-python scripts/main.py projects
-python scripts/main.py list --project=demo-mp
-python scripts/main.py find --project=demo-mp --name arrow-right
-python scripts/main.py create --project=demo-mp --svg ./assets/icons/add.svg
-python scripts/main.py create --project=demo-mp --svg ./assets/icons/add.svg --confirm
-python scripts/main.py create-sync --project=demo-mp --svg ./assets/icons/add.svg --confirm
-```
-
-完整命令说明见：[references/commands.md](./references/commands.md)。
-
-完整使用示例见：[references/examples.md](./references/examples.md)。
-
-## 注意事项
-
-| 项             | 说明                                                             |
-| :------------ | :------------------------------------------------------------- |
-| 写操作默认 dry-run | 上传、更新、删除、同步等真实写操作需要显式确认，命令行中需要 `--confirm`。                    |
-| 删除优先用 ID      | Iconfont 允许同名图标，按名称删除可能不安全；建议先查询 `id` 再删除。                     |
-| 新上传图标有审核延迟    | Iconfont 新上传素材通常有约 5 分钟审核时间，审核期间查询或同步可能暂时看不到新图标。               |
-| 复杂 SVG 可能无法上传 | 渐变、滤镜、`defs`、`use`、`mask`、位图或 `url(#...)` 引用等复杂 SVG 会被预检提示并跳过。 |
-| 不要提交真实凭据      | `scripts/.env` 只应保存在本地，不要提交账号、密码或 Cookie。                      |
-
+| `帮我上传本地 ./assets/icons/add.svg 到 web-app-icons 项目`   | 先 dry-run 检查 SVG，再提示是否确认上传。                          |
+| `帮我把 ./assets/icons 目录下的图标上传到 web-app-icons，并同步到本地`  | 上传目录内 SVG，等待确认后执行同步工作流。                              |
+| `帮我删除 web-app-icons 项目里 id 为 123 的图标并同步本地`           | 按 ID 精确删除远程图标，并同步本地 SVG 和字体产物。                       |

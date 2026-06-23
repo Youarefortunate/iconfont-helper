@@ -1,5 +1,6 @@
 import base64
 import io
+import os
 import re
 import shutil
 import subprocess
@@ -17,14 +18,22 @@ from update import update_icon
 SCRIPT_DIR = Path(__file__).resolve().parent
 
 
-def find_repo_root() -> Path:
-    """向上查找包含 pnpm-workspace.yaml 的项目根目录。"""
-    current = SCRIPT_DIR
-    while current.parent != current:
-        if (current / "pnpm-workspace.yaml").exists():
-            return current
-        current = current.parent
-    raise IconfontConfigError("未找到包含 pnpm-workspace.yaml 的项目根目录")
+def resolve_project_root(project_config: Dict[str, Any]) -> Path:
+    """解析本地根目录。"""
+    configured_root = str(project_config.get("project_root") or "").strip()
+    env_root = os.environ.get("ICONFONT_PROJECT_ROOT", "").strip()
+    root = configured_root or env_root
+    if root:
+        return Path(root).expanduser().resolve()
+    return Path.cwd().resolve()
+
+
+def resolve_project_path(project_root: Path, path_value: str) -> Path:
+    """解析本地路径，支持绝对路径或相对 project_root 的路径。"""
+    path = Path(path_value).expanduser()
+    if path.is_absolute():
+        return path.resolve()
+    return (project_root / path).resolve()
 
 
 def resolve_project_context(project: str = "", project_id: str = "") -> Dict[str, Any]:
@@ -56,8 +65,8 @@ def sync_remote_svgs(project_config: Dict[str, Any]) -> Dict[str, Any]:
     if not project_id or not svg_dir:
         raise IconfontConfigError("项目配置缺少 project_id 或 svg_dir")
 
-    repo_root = find_repo_root()
-    folder = repo_root / svg_dir
+    repo_root = resolve_project_root(project_config)
+    folder = resolve_project_path(repo_root, svg_dir)
     folder.mkdir(parents=True, exist_ok=True)
 
     icons = list_icons(project_id)
@@ -181,8 +190,8 @@ def write_data_js(path: Path, info: Dict[str, str]) -> None:
 
 def build_local_outputs(project_config: Dict[str, Any]) -> Dict[str, Any]:
     """基于本地 SVG 目录生成字体、映射与样式输出。"""
-    repo_root = find_repo_root()
-    svg_dir = repo_root / str(project_config.get("svg_dir") or "")
+    repo_root = resolve_project_root(project_config)
+    svg_dir = resolve_project_path(repo_root, str(project_config.get("svg_dir") or ""))
     font_name = str(project_config.get("font_name") or "")
     outputs = project_config.get("outputs") or []
     if not svg_dir.exists() or not any(svg_dir.glob("*.svg")):
@@ -205,7 +214,7 @@ def build_local_outputs(project_config: Dict[str, Any]) -> Dict[str, Any]:
         out_type = output.get("type")
         if not out_path:
             continue
-        target = repo_root / str(out_path)
+        target = resolve_project_path(repo_root, str(out_path))
         if out_type == "scss_map":
             write_scss_map(target, info)
         elif out_type == "font_face":

@@ -1,38 +1,39 @@
 {
-  "demo-mp": {
-    "name": "示例小程序",
-    "project_id": "可以在对应的Iconfont项目的链接中查看",
-    "font_name": "demo-icons",
-    "associated_project": "apps/demo-mp",
-    "svg_dir": "apps/demo-mp/styles/iconfont/svg",
+  "web-app-icons": {
+    "name": "示例 Web 应用图标库",
+    "project_id": "1234567",
+    "font_name": "web-app-icons",
+    "project_root": ".",
+    "svg_dir": "assets/icons/svg",
     "outputs": [
       {
         "type": "scss_map",
-        "path": "apps/demo-mp/styles/iconfont/icons.scss"
+        "path": "src/styles/icons.scss"
       },
       {
         "type": "font_face",
-        "path": "apps/demo-mp/styles/iconfont/index.scss"
+        "path": "src/styles/iconfont.css"
       }
     ]
   },
-  "component-lib": {
-    "name": "示例组件库包",
+  "library-icons": {
+    "name": "示例组件库图标库",
     "project_id": "7654321",
-    "font_name": "component-icons",
-    "svg_dir": "packages/components/assets/icons",
+    "font_name": "library-icons",
+    "project_root": ".",
+    "svg_dir": "packages/icon-library/assets/svg",
     "outputs": [
       {
         "type": "scss_map",
-        "path": "packages/components/styles/icons.scss"
+        "path": "packages/icon-library/styles/icons.scss"
       },
       {
         "type": "font_face",
-        "path": "packages/components/icon/icon.scss"
+        "path": "packages/icon-library/styles/iconfont.css"
       },
       {
         "type": "data_js",
-        "path": "packages/components/icon/example/data.js"
+        "path": "packages/icon-library/examples/icons.js"
       }
     ]
   }
